@@ -1,0 +1,70 @@
+.admin {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1.2fr 4fr;
+
+  &_menu-drawer {
+    background-color: #373435;
+    display: grid;
+    grid-template-rows: 25% 50%;
+
+    >* {
+      margin: auto;
+    }
+
+    &_navbar {
+      ul {
+        list-style-type: none;
+        li {
+            padding-bottom: 32px;
+          a {
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+          }
+        }
+      }
+
+      button {
+        color: #1475a2;
+        background: none;
+        cursor: pointer;
+        border: 1px solid #1475a2;
+        border-radius: 20px;
+        padding: 5px 30px;
+      }
+    }
+  }
+
+  &_content{
+    padding: 3vh 3vw;
+    background-color: #E5E5E5;
+
+    &_header{
+        background-color: white;
+        display: flex;
+        padding: 2vh 0;
+        justify-content: space-around;
+        align-items: center;
+        border-bottom: 2px solid #1475A2;
+
+        &_title{
+            font-weight: 600;
+            font-size: 24px;
+        }
+
+        &_notifications{
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            p{
+                margin-right: 20px;
+            }
+        }
+
+    }
+
+
+  }
+}

@@ -1,0 +1,12 @@
+*,*::after,*::before{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Segoe UI;
+}
+
+
+
+// media breakpoins;
+$breakpoint-768: 768px;
+$breakpoint-375: 375px;

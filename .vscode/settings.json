@@ -1,0 +1,9 @@
+{
+    "bemHelper.maxWarningsCount": 0,
+    "bemHelper.classNameCase": "shoutingSnake",
+    "bemHelper.elementSeparator": "_",
+    "bemHelper.newLineAfterInsert": false,
+    "bemHelper.responsiveLinting": false,
+    "bemHelper.showDepthWarnings": false,
+    "bemHelper.sortGeneratedStylesheets": false
+}

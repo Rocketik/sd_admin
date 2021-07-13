@@ -24,26 +24,35 @@
           }
         }
       }
-
-      button {
-        color: #1475a2;
-        background: none;
+      button{
+        display: flex;
+        color: rgba(20, 117, 162, 1);
+        font-size: 16px;
+        background: no-repeat;
+        border: none;
         cursor: pointer;
         border: 1px solid #1475a2;
         border-radius: 20px;
-        padding: 5px 30px;
-      }
+        padding: 7px 25px;
+
+        img{
+          margin-right: 10px;
+        }
+      } 
     }
   }
 
   &_content{
     padding: 3vh 3vw;
     background-color: #E5E5E5;
+    height: 100vh;
+    display: grid;
+    grid-row-gap: 4vh;
+    grid-template-rows: 1.1fr 10fr;
 
     &_header{
         background-color: white;
-        display: flex;
-        padding: 2vh 0;
+        display: flex; 
         justify-content: space-around;
         align-items: center;
         border-bottom: 2px solid #1475A2;
@@ -64,7 +73,104 @@
         }
 
     }
+    &_inner{ 
+        padding: 10vh 2vw 2vh ; 
+        background-color: white;
 
+        &-partners{
+          padding: 0;
+          display: grid;
+          grid-template-rows: 15% 70%;
+        }
+
+        &_partners{
+          width: 47.5%;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          margin: auto;
+          align-content: center;
+
+          &_item{
+            padding: 1% 5%;
+            position: relative;
+
+            .deleteIcon{
+              position: absolute;
+              cursor: pointer;
+              bottom: 0;
+              right: -4px;
+            }
+          }
+        }
+
+        &_add{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          button{
+            display: flex;
+            color: rgba(20, 117, 162, 1);
+            font-size: 16px;
+            background: no-repeat;
+            border: none;
+            cursor: pointer;
+
+            img{
+              margin-right: 10px;
+            }
+          } 
+        }
+
+        table{
+            height: 100%;
+            width: 100%;
+            border: 1px solid #C4C4C4;
+            border-collapse: collapse;
+        
+            tbody {
+                display: block;
+                height: 90.2%;
+                overflow: auto;
+                
+
+                &::-webkit-scrollbar {
+                    width: 4px;
+                   
+                  }
+                  
+                  /* Track */
+ 
+                   
+                  /* Handle */
+                &::-webkit-scrollbar-thumb { 
+                    background-color: #1475A2; 
+                  }
+            }
+
+            thead, tbody tr {
+                display: table;
+                width: 100%;
+                table-layout: fixed;/* even columns width , fix width of table too*/
+            }
+            thead {
+              height: 9.8%;
+              width: calc( 100% - 4px );
+          }
+
+            tr{
+              height: 15%
+            }
+  
+            td,th{ 
+                font-weight: normal;
+                font-size: 16px;
+                text-align: center;
+                border: 1px solid #C4C4C4;
+            }
+        }
+    }
 
   }
 }

@@ -5,6 +5,7 @@ import ResetPasswordLevel2 from './components/auth/forget-password/ResetPassword
 import ResetPasswordLevel3 from './components/auth/forget-password/ResetPasswordLevel3';
 import ResetPasswordSuccessfull from './components/auth/forget-password/ResetPasswordSuccessfull';
 import Gallery from './components/admin/gallery/Gallery';
+import Partners from './components/admin/partenrs/Partners';
 
 const routes = [
     {
@@ -36,6 +37,11 @@ const routes = [
         href: "/admin/gallery",
         isExact: true, 
         component: Gallery,
+    },
+    {
+        href: "/admin/partners",
+        isExact: true, 
+        component: Partners,
     }
     
 ]

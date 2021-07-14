@@ -8,7 +8,7 @@
     display: grid;
     grid-template-rows: 25% 50%;
 
-    >* {
+    > * {
       margin: auto;
     }
 
@@ -16,7 +16,7 @@
       ul {
         list-style-type: none;
         li {
-            padding-bottom: 32px;
+          padding-bottom: 32px;
           a {
             text-decoration: none;
             color: white;
@@ -24,7 +24,7 @@
           }
         }
       }
-      button{
+      button {
         display: flex;
         color: rgba(20, 117, 162, 1);
         font-size: 16px;
@@ -35,142 +35,201 @@
         border-radius: 20px;
         padding: 7px 25px;
 
-        img{
+        img {
           margin-right: 10px;
         }
-      } 
+      }
     }
   }
 
-  &_content{
+  &_content {
     padding: 3vh 3vw;
-    background-color: #E5E5E5;
+    background-color: #e5e5e5;
     height: 100vh;
     display: grid;
     grid-row-gap: 4vh;
     grid-template-rows: 1.1fr 10fr;
 
-    &_header{
-        background-color: white;
-        display: flex; 
-        justify-content: space-around;
+    &_header {
+      background-color: white;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      border-bottom: 2px solid #1475a2;
+
+      &_title {
+        font-weight: 600;
+        font-size: 24px;
+      }
+
+      &_notifications {
+        display: flex;
         align-items: center;
-        border-bottom: 2px solid #1475A2;
+        cursor: pointer;
 
-        &_title{
-            font-weight: 600;
-            font-size: 24px;
+        p {
+          margin-right: 20px;
         }
-
-        &_notifications{
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-
-            p{
-                margin-right: 20px;
-            }
-        }
-
+      }
     }
-    &_inner{ 
-        padding: 10vh 2vw 2vh ; 
+
+    &_inner {
+      padding: 10vh 2vw 2vh;
+      background-color: white;
+
+      &-partners {
+        padding: 0;
+        display: grid;
+        grid-template-rows: 15% 70%;
+      }
+
+      &_partners {
+        width: 47.5%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: auto;
+        align-content: center;
+
+        &_item {
+          padding: 1% 5%;
+          position: relative;
+
+          .deleteIcon {
+            position: absolute;
+            cursor: pointer;
+            bottom: 0;
+            right: -4px;
+          }
+        }
+      }
+
+      &_add {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button {
+          display: flex;
+          color: rgba(20, 117, 162, 1);
+          font-size: 16px;
+          background: no-repeat;
+          border: none;
+          cursor: pointer;
+
+          img {
+            margin-right: 10px;
+          }
+        }
+      }
+
+      table {
+        height: 100%;
+        width: 100%;
+        border: 1px solid #c4c4c4;
+        border-collapse: collapse;
+
+        tbody {
+          display: block;
+          height: 90.2%;
+          overflow: auto;
+
+          &::-webkit-scrollbar {
+            width: 4px;
+          }
+
+          /* Track */
+
+          /* Handle */
+          &::-webkit-scrollbar-thumb {
+            background-color: #1475a2;
+          }
+        }
+
+        thead,
+        tbody tr {
+          display: table;
+          width: 100%;
+          table-layout: fixed; /* even columns width , fix width of table too*/
+        }
+        thead {
+          height: 9.8%;
+          width: calc(100% - 4px);
+        }
+
+        tr {
+          height: 15%;
+        }
+
+        td,
+        th {
+          font-weight: normal;
+          font-size: 16px;
+          text-align: center;
+          border: 1px solid #c4c4c4;
+        }
+      }
+    }
+    &_mail {
+      display: grid;
+      grid-column-gap: 1vw;
+      grid-template-columns: 1fr 2.5fr;
+      overflow: auto;
+      &_sidebar{
         background-color: white;
+        overflow: auto;
+        display: grid;
+        grid-template-rows: auto 1fr;
 
-        &-partners{
-          padding: 0;
-          display: grid;
-          grid-template-rows: 15% 70%;
+        &_logo{
+          margin: 11px 0 6.3vh 18px;
         }
 
-        &_partners{
-          width: 47.5%;
-          display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          margin: auto;
-          align-content: center;
-
+        &_dialog-panel{
+          overflow: auto;
           &_item{
-            padding: 1% 5%;
-            position: relative;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            padding: 7px 27px 5px 11px;
+            border-bottom: 2px solid #e5e5e5;
 
-            .deleteIcon{
-              position: absolute;
-              cursor: pointer;
-              bottom: 0;
-              right: -4px;
-            }
-          }
-        }
-
-        &_add{
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          button{
-            display: flex;
-            color: rgba(20, 117, 162, 1);
-            font-size: 16px;
-            background: no-repeat;
-            border: none;
-            cursor: pointer;
-
-            img{
-              margin-right: 10px;
-            }
-          } 
-        }
-
-        table{
-            height: 100%;
-            width: 100%;
-            border: 1px solid #C4C4C4;
-            border-collapse: collapse;
-        
-            tbody {
-                display: block;
-                height: 90.2%;
-                overflow: auto;
-                
-
-                &::-webkit-scrollbar {
-                    width: 4px;
-                   
-                  }
-                  
-                  /* Track */
- 
-                   
-                  /* Handle */
-                &::-webkit-scrollbar-thumb { 
-                    background-color: #1475A2; 
-                  }
+            input[type='checkbox'] {
+              height: 24px;
+              width: 24px;
+              -webkit-appearance: none; 
+              background-color: rgba(229, 229, 229, 1);
+              margin-right: 23px;
             }
 
-            thead, tbody tr {
-                display: table;
-                width: 100%;
-                table-layout: fixed;/* even columns width , fix width of table too*/
-            }
-            thead {
-              height: 9.8%;
-              width: calc( 100% - 4px );
-          }
-
-            tr{
-              height: 15%
-            }
-  
-            td,th{ 
-                font-weight: normal;
+            &_name-subject{
+              flex-grow: 1;
+              overflow: hidden;
+              
+              h2{
+                font-weight: 600;
                 font-size: 16px;
-                text-align: center;
-                border: 1px solid #C4C4C4;
+              }
+              
+              p{
+                font-weight: 350;
+                font-size: 16px;
+                color: rgba(139, 136, 146, 1);
+                overflow: hidden; 
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
             }
-        }
-    }
 
+        
+
+          }
+
+        }
+      }
+
+      &_inner{
+        background-color: white;
+      }
+    }
   }
 }

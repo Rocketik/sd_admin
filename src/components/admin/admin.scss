@@ -63,13 +63,17 @@
       }
 
       &_notifications {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
+        a{
+          display: flex;
+          align-items: center; 
+          text-decoration: none;
 
-        p {
-          margin-right: 20px;
+          p {
+            margin-right: 20px;
+            color: black;
+          }
         }
+ 
       }
     }
 
@@ -175,60 +179,116 @@
       grid-column-gap: 1vw;
       grid-template-columns: 1fr 2.5fr;
       overflow: auto;
-      &_sidebar{
+      &_sidebar {
         background-color: white;
         overflow: auto;
         display: grid;
         grid-template-rows: auto 1fr;
 
-        &_logo{
+        &_logo {
           margin: 11px 0 6.3vh 18px;
         }
 
-        &_dialog-panel{
+        &_dialog-panel {
           overflow: auto;
-          &_item{
+          &_item {
             display: grid;
             grid-template-columns: auto 1fr;
             padding: 7px 27px 5px 11px;
             border-bottom: 2px solid #e5e5e5;
 
-            input[type='checkbox'] {
+            input[type="checkbox"] {
               height: 24px;
               width: 24px;
-              -webkit-appearance: none; 
+              -webkit-appearance: none;
               background-color: rgba(229, 229, 229, 1);
               margin-right: 23px;
             }
 
-            &_name-subject{
+            &_name-subject {
               flex-grow: 1;
               overflow: hidden;
-              
-              h2{
+
+              h2 {
                 font-weight: 600;
                 font-size: 16px;
               }
-              
-              p{
+
+              p {
                 font-weight: 350;
                 font-size: 16px;
                 color: rgba(139, 136, 146, 1);
-                overflow: hidden; 
+                overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
               }
             }
-
-        
-
           }
-
         }
       }
 
-      &_inner{
+      &_inner {
         background-color: white;
+        padding-top: 16%;
+        padding-left: 11%;
+        padding-right: 15.3%;
+
+        &_main-part {
+          &_header {
+            display: flex;
+            align-items: center;
+
+            h2 {
+              font-weight: 600;
+              font-size: 16px;
+              margin-left: 13px;
+            }
+          }
+          &_mail {
+            margin-top: 26px;
+
+            h2,
+            p {
+              font-weight: 350;
+              font-size: 16px;
+              color: #8b8892;
+            }
+            p {
+              margin-top: 14px;
+            }
+          }
+
+          &_send-mail {
+            margin-top: 10%;
+
+            textarea {
+              border: 1px solid #e5e5e5;
+              border-radius: 15px;
+              width: 100%;
+              padding: 20px;
+              outline: none;
+              resize: none;
+            }
+          }
+          &_submit {
+            margin-top: 27px;
+            display: flex;
+            justify-content: flex-end;
+
+            button {
+              cursor: pointer;
+              border: none;
+              outline: none;
+              background: none;
+              color: #727376;
+              padding: 14px 8px 15px 16px;
+              font-size: 12px;
+              border: 1px solid #e5e5e5;
+              
+              border-radius: 5px;
+            }
+          }
+        }
       }
     }
   }

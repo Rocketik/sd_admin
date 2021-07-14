@@ -3,6 +3,9 @@ import Admin from "./../Admin";
 import AdminContentHeader from "./../AdminContentHeader";
 import mailbox from "../../../assets/images/notification_mailbox.png";
 import DialogItem from "./DialogItem";
+import NotificationsInner from './NotificationsInner';
+import notificationUserImg from '../../../assets/images/notificationUserImg.png'
+
 
 const notificationsConfig = [
   {
@@ -65,6 +68,14 @@ const notificationsConfig = [
     subject: "Մեր կազմակերպությունը ուղղարկում է ձեզ լիքը լիքը նամակներ",
   },
 ];
+const notificationsConfigInner = {
+   userImg : notificationUserImg,
+   name : "Mailchimp",
+   mail: {
+     title : "Dear Sdesign,",
+     subject : "Lorem IPsum",
+   }
+};
 function Notifications() {
   return (
     <Admin>
@@ -79,7 +90,7 @@ function Notifications() {
               ))}
             </div>
           </div>
-       
+              <NotificationsInner data={ notificationsConfigInner } /> 
         </div>
       </div>
     </Admin>

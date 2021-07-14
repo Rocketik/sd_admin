@@ -27,7 +27,10 @@ const galleryTableConfig = {
     ["685459", "64656545665.jpg", "2", "64656545665.jpg", "  ID Բանկ"],
   ],
 };
+
 export default function Gallery(props) {
+ 
+
   return (
     <Admin>
       <div className="admin_content">
@@ -46,6 +49,10 @@ export default function Gallery(props) {
           </table>
         </div>
       </div>
+      
+       
+      
+     
     </Admin>
   );
 }

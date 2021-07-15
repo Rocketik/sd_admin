@@ -1,35 +1,35 @@
 import React, { useState } from "react";
 import deleteIcon from "../../../assets/images/deleteIcon.png";
 import Modal from "./../../modals/Modal";
-import { changeModalState } from './../../../js/lib/front-libik';
+import { changeModalState } from "./../../../js/lib/front-libik";
+import DeleteItemModal from "./../../modals/admin/DeleteItemModal";
 
 export default function TRow({ type, data }) {
-  const [isDeleteItemOpen, setisDeleteItemOpen] = useState(false);
+  const [isDeleteItemModalOpen, setisDeleteItemModalOpen] = useState(false);
 
-  const openDeleteItemModalAndTrtDeleteRow = ( e ) => {
-    changeModalState(setisDeleteItemOpen);
-  }
+  const openDeleteItemModalAndTrytDeleteRow = (e) => { 
+    changeModalState(setisDeleteItemModalOpen);
+  };
 
-  
   return (
     <>
-      <tr>
-        {data.map((el, i) =>
-          type === "head" ? <th key={i}>{el}</th> : <td key={i}>{el}</td>
+      <tr>{data.map((el, i) =>
+          type === "head" ?<th key={i}>{el}</th> : <td key={i}>{el}</td>
         )}
-        {type !== "head" ? (
-          <td>
-            <img src={deleteIcon} alt="" onClick={ openDeleteItemModalAndTrtDeleteRow } /> 
-          </td>
-        ) : (
-          ""
-        )}
+        {type !== "head" && (<td>
+            <img
+              className="deleteButton"
+              src={deleteIcon}
+              alt=""
+              onClick={openDeleteItemModalAndTrytDeleteRow}
+            />
+          </td>)}
       </tr>
-      {isDeleteItemOpen ?
-       <Modal>
-
-       </Modal>
-        : ""}
+      {isDeleteItemModalOpen && (
+        <Modal>
+          <DeleteItemModal  closeModal={() => changeModalState(setisDeleteItemModalOpen)} />
+        </Modal>
+      )  }
     </>
   );
 }

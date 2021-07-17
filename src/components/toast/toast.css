@@ -1,0 +1,73 @@
+.ino-toast {
+    border-radius: 5px;
+    box-shadow: 4px 5px 8px 2px #b3b3b3;
+    position: relative;
+    transition: transform 1s, max-height 1s ease 1s;
+}
+
+.ino-toast:hover {
+    cursor: pointer;
+}
+
+.ino-toast-show {
+    margin-top: 15px;
+    transition: 0.3s;
+    transform: translateY(10%);
+    max-height: 400px;
+}
+
+.ino-toast-hide {
+    margin-top: 0px;
+    transition: 0.3s;
+    transform: translateY(0%);
+    max-height: 0px;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.remove-ino-toast {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: white;
+    transition: 0.3s;
+    box-shadow: 0px 0px 0px black;
+}
+
+.remove-ino-toast:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 9px black;
+}
+
+.ino-text {
+    color: white;
+    padding: 15px 10px;
+    text-align: justify;
+}
+
+.ino-progress {
+    height: 7px;
+    background: rgba(255, 255, 255, 0.712);
+}
+
+.ino-success-toast {
+    background-color: #0F655E;
+}
+
+.ino-error-toast  {
+    background-color: #dc3545;
+}
+
+.ino-info-toast  {
+    background-color: #00b4d8;
+}
+
+.ino-warning-toast  {
+    background-color: #FBBB4B;
+}

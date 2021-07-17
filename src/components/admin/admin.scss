@@ -132,6 +132,7 @@
         width: 100%;
         border: 1px solid #c4c4c4;
         border-collapse: collapse;
+        position: relative;
 
         tbody {
           display: block;
@@ -140,6 +141,8 @@
 
           &::-webkit-scrollbar {
             width: 4px;
+            position: absolute;
+            left: 0;
           }
 
           /* Track */

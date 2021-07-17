@@ -76,6 +76,7 @@
 
         .input-file-target{
             cursor: pointer;
+            object-fit: cover;
         }
         
         &_grid-container{
@@ -128,6 +129,7 @@
                 border: none;
                 padding: 11px 36px;
                 color: rgb(255, 255, 255);
+                cursor: pointer;
             }
 
         }

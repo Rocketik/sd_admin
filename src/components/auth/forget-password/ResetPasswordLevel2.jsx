@@ -1,11 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 
 import ResetPassword from "./ResetPassword";
+import { inoToast } from './../../toast/toast'; 
+import { doRequest } from "../../../js/lib/front-libik";
+import { host, requestRoutes } from './../../../js/config';
+import { useHistory } from 'react-router-dom';
+import Loading from './../../loading/Loading';
 
-export default function ResetPasswordLevel2() { 
+export default function ResetPasswordLevel2( props ) { 
+  const history = useHistory();
+  const [isLoadingOpen, setisLoadingOpen] = useState(false);
+
   const sendRequest = (e) => {
+    
     e.preventDefault();
+    const formElements = e.target.elements;
+    const reqData = {
+      resetCode: "" + formElements.codeInput1.value + formElements.codeInput2.value + formElements.codeInput3.value + formElements.codeInput4.value, 
+    };  
+      
+      setisLoadingOpen(previos => !previos);
+      doRequest({
+        method: "post",
+        url: host + requestRoutes.resetPasswordSecond(),
+        data: reqData,
+        headers: {
+          token : props.location.params.token
+        } 
+      })
+      .then(() => {
+        
+        setisLoadingOpen(previos => !previos);
+        inoToast.success(" Successfully")
+        // setTimeout(() => {  
+          history.push({
+            pathname: "/forget-password/setPassword", 
+            params : { 
+                token :  props.location.params.token
+            }
+          });
+        // }, 1000);
+      })
+      .catch( err => { 
+        
+        setisLoadingOpen(previos => !previos);
+        inoToast.error( err.toUpperCase() )
+      });
+      
+     
   };
+ 
+ 
   const handleCodeInputs = (e) => {
     const target = e.target;
     if (e.code !== "Backspace") {
@@ -74,6 +119,8 @@ export default function ResetPasswordLevel2() {
           </div>
         </form>
       </div>
+      
+      {  isLoadingOpen && <Loading  type="spin" /> }
     </ResetPassword>
   );
 }

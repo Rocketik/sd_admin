@@ -1,10 +1,50 @@
 import React from "react";
 
 import ResetPassword from "./ResetPassword";
+import { inoToast } from './../../toast/toast'; 
+import { doRequest } from "../../../js/lib/front-libik";
+import { host, requestRoutes } from './../../../js/config';
+import { useHistory } from 'react-router-dom';
 
-export default function ResetPasswordLevel3() {
+export default function ResetPasswordLevel3( props ) { 
+  const history = useHistory();
+  console.log(props);
   const sendRequest = (e) => {
+    
     e.preventDefault();
+    const formElements = e.target.elements;
+    const reqData = {
+      "new-password": formElements.password ? formElements.password.value : null,  
+    };  
+   
+    if(formElements["repeat-password"].value != formElements.password.value ){
+      inoToast.error("Password and Repat password dosnt equal")
+    }else{
+   
+      doRequest({
+        method: "post",
+        url: host + requestRoutes.resetPasswordThird(),
+        data: reqData,
+        headers: {
+          token : props.location.params.token 
+        } 
+      })
+      .then(( ) => {
+        
+        inoToast.success(" Successfully")
+        setTimeout(() => { 
+          history.push({
+            pathname: "/forget-password/success", 
+          });
+        }, 1000);
+      })
+      .catch( err => { 
+        inoToast.error( err.toUpperCase() )
+      });
+    }
+ 
+      
+     
   };
   return (
     <ResetPassword title="Նոր գաղտնաբառ">

@@ -7,7 +7,7 @@ import Modal from './../modals/Modal';
 import { changeModalState } from './../../js/lib/front-libik'; 
 import AddForMenuModal from './../modals/admin/AddForMenuModal';
 
-export default function MenuDrawer() {  
+export default function MenuDrawer( { isGalery } ) {  
 
     const [isAddForMenuModalOpen, setisAddForMenuModalOpen] = useState(false);
     const openAddForMenuModal = (e) => { 
@@ -25,7 +25,7 @@ export default function MenuDrawer() {
                     <li> <Link to="/admin/gallery">ՏԵՍԱԴԱՐԱՆ</Link> </li>
                     <li> <Link to="/admin/partners">ԳՈՐԾԸՆԿԵՐՆԵՐ</Link> </li>
                 </ul>
-                <button onClick={ openAddForMenuModal } ><img src={addIcon} alt="" /> Ավելացնել </button>
+                <button disabled={!isGalery} style={ !isGalery ? { cursor: "not-allowed" } : { cursor: "pointer" }    } onClick={ openAddForMenuModal } ><img src={addIcon} alt="" /> Ավելացնել </button>
             </div>
             
         </div>

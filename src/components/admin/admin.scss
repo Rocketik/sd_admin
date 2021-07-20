@@ -29,8 +29,7 @@
         color: rgba(20, 117, 162, 1);
         font-size: 16px;
         background: no-repeat;
-        border: none;
-        cursor: pointer;
+        border: none; 
         border: 1px solid #1475a2;
         border-radius: 20px;
         padding: 7px 25px;
@@ -85,6 +84,7 @@
         padding: 0;
         display: grid;
         grid-template-rows: 15% 70%;
+
       }
 
       &_partners {
@@ -93,7 +93,9 @@
         flex-wrap: wrap;
         align-items: center;
         margin: auto;
-        align-content: center;
+        align-content: flex-start;
+        height: 100%;
+        overflow: auto;
 
         &_item {
           padding: 1% 5%;
@@ -104,6 +106,10 @@
             cursor: pointer;
             bottom: 0;
             right: -4px;
+          }
+
+          img{
+            max-height: 90px;
           }
         }
       }
@@ -174,6 +180,8 @@
           font-size: 16px;
           text-align: center;
           border: 1px solid #c4c4c4;
+         word-wrap: break-word;
+         padding: 0 10px;
         }
         .deleteButton{
           cursor: pointer;
@@ -202,7 +210,7 @@
             grid-template-columns: auto 1fr;
             padding: 7px 27px 5px 11px;
             border-bottom: 2px solid #e5e5e5;
-
+            cursor: pointer;
             input[type="checkbox"] {
               height: 24px;
               width: 24px;
@@ -238,7 +246,8 @@
         padding-top: 16%;
         padding-left: 11%;
         padding-right: 15.3%;
-
+        overflow: auto;
+        
         &_main-part {
           &_header {
             display: flex;

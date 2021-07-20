@@ -34,7 +34,7 @@ export default function ResetPasswordLevel1() {
         // setTimeout(() => { 
           history.push({
             pathname: "/forget-password/verifyEmail", 
-            params : { 
+            state : { 
                 token : data.token
             }
           });
@@ -42,7 +42,7 @@ export default function ResetPasswordLevel1() {
       })
       .catch( err => { 
         setisLoadingOpen(previos => !previos);
-        inoToast.error( err.toUpperCase() )
+        inoToast.error( err.response.data.errMessage.toUpperCase() )
       });
       
     }

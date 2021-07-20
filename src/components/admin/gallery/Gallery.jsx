@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import Admin from "./../Admin";
 import AdminContentHeader from "./../AdminContentHeader";
 import TRow from "./TRow";
 import { isAuthificationPassed } from "../../../js/lib/front-libik";
 
-import { getData } from "./../../../js/requests";
-import { useHistory } from "react-router-dom";
+import { getGalleryData } from "./../../../js/requests"; 
+import Loading from './../../loading/Loading';
 
 // const galleryTableConfig = {
 //   head: [
@@ -33,22 +33,23 @@ import { useHistory } from "react-router-dom";
 // };
 export const GalleryContext = React.createContext(null);
 
-export default function Gallery(props) {
-  const [galleryTableConfig, setgalleryTableConfig] = useState();
-  const history = useHistory();
+export default function Gallery({history}) {
+  const [galleryTableConfig, setgalleryTableConfig] = useState(); 
+  const [isLoadingOpen, setisLoadingOpen] = useState(false);
 
   useEffect(() => {
     const token = isAuthificationPassed();
     !token && history.push("/");
-
-    getData((data) => {
+    setisLoadingOpen(true);
+    getGalleryData((data) => {
       setgalleryTableConfig(data);
+      setisLoadingOpen(false);
     });
   }, []);
 
   return (
-    <GalleryContext.Provider value={setgalleryTableConfig}>
-      <Admin>
+    <GalleryContext.Provider value={setgalleryTableConfig}> 
+      <Admin isGalery={true}>
         <div className="admin_content">
           <AdminContentHeader title="Տեսադարան" />
           <div className="admin_content_inner">
@@ -68,6 +69,8 @@ export default function Gallery(props) {
           </div>
         </div>
       </Admin>
+      {isLoadingOpen && <Loading type="spin" />}
+        
     </GalleryContext.Provider>
   );
 }

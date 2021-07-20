@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext  } from "react";
 import deleteIcon from "../../../assets/images/deleteIcon.png";
 import Modal from "./../../modals/Modal";
 import { changeModalState } from "./../../../js/lib/front-libik";
 import DeleteItemModal from "./../../modals/admin/DeleteItemModal";
 import { host, requestRoutes } from "./../../../js/config";
+import { getGalleryData } from './../../../js/requests';
+import { GalleryContext } from './../../admin/gallery/Gallery';
+
 
 export default function TRow({ type, data }) {
+  const GalleryContextVal = useContext(GalleryContext);
+
   const [isDeleteItemModalOpen, setisDeleteItemModalOpen] = useState(false);
   const deleteItemReqData = {
     method: "delete",
@@ -15,7 +20,11 @@ export default function TRow({ type, data }) {
       token: localStorage.token,
     },
   };
-
+  const resetData = ()=>{
+    getGalleryData((data)=>{
+      GalleryContextVal(data)
+  })
+  }
   return (
     <>
       <tr>
@@ -37,6 +46,7 @@ export default function TRow({ type, data }) {
         <Modal>
           <DeleteItemModal
             reqParams={deleteItemReqData}
+            resetData={resetData}
             closeModal={() => changeModalState(setisDeleteItemModalOpen)}
           />
         </Modal>

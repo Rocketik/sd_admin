@@ -14,8 +14,8 @@ export default function LoginContent() {
     e.preventDefault();
     const formElements = e.target.elements;
     const reqData = {
-      email: formElements.email ? formElements.email.value : null,
-      password: formElements.password ? formElements.password.value : null,
+      email:   formElements.email.value ,
+      password:   formElements.password.value ,
     };
     
     const { error } = userValidation(reqData);
@@ -38,7 +38,7 @@ export default function LoginContent() {
       })
       .catch( err => { 
         setisLoadingOpen(previos => !previos);
-        inoToast.error( err.toUpperCase() )
+        inoToast.error( err.response.data.errMessage.toUpperCase() )
       })
     }
   };

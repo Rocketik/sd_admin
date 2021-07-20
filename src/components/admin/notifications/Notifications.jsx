@@ -1,99 +1,71 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Admin from "./../Admin";
 import AdminContentHeader from "./../AdminContentHeader";
 import mailbox from "../../../assets/images/notification_mailbox.png";
 import DialogItem from "./DialogItem";
-import NotificationsInner from './NotificationsInner';
-import notificationUserImg from '../../../assets/images/notificationUserImg.png'
+import NotificationsInner from "./NotificationsInner";
+import { getNotificationUsers } from "./../../../js/requests";
+import Loading from './../../loading/Loading';
+import { isAuthificationPassed } from "../../../js/lib/front-libik";
 
+let notificationsConfigInner = null;
 
-const notificationsConfig = [
-  {
-    name: "Mailchimp",
-    subject: null,
-  },
-  {
-    name: "Screenlane",
-    subject: null,
-  },
-  {
-    name: "Stepan Sargsyan",
-    subject:
-      "զանգահարել ներքոնշյալ հեռախոսահամարով , որպիսի հաց ու պանիր ուտեք",
-  },
-  {
-    name: "Emma Atoyan",
-    subject: "Կից ներկայացված են քաղվածքներ 01.02.2021 , դուք դուռակեք երևի",
-  },
-  {
-    name: "Marine Mikoyan",
-    subject: "Խնդրում եմ ուղարկել գնային առաջարկ ։",
-  },
-  {
-    name: "Seda Mkrtchyan",
-    subject: "Մեր կազմակերպությունը ուղղարկում է ձեզ լիքը լիքը նամակներ",
-  },
-  {
-    name: "Stepan Sargsyan",
-    subject:
-      "զանգահարել ներքոնշյալ հեռախոսահամարով , որպիսի հաց ու պանիր ուտեք",
-  },
-  {
-    name: "Emma Atoyan",
-    subject: "Կից ներկայացված են քաղվածքներ 01.02.2021 , դուք դուռակեք երևի",
-  },
-  {
-    name: "Marine Mikoyan",
-    subject: "Խնդրում եմ ուղարկել գնային առաջարկ ։",
-  },
-  {
-    name: "Seda Mkrtchyan",
-    subject: "Մեր կազմակերպությունը ուղղարկում է ձեզ լիքը լիքը նամակներ",
-  },
-  {
-    name: "Stepan Sargsyan",
-    subject:
-      "զանգահարել ներքոնշյալ հեռախոսահամարով , որպիսի հաց ու պանիր ուտեք",
-  },
-  {
-    name: "Emma Atoyan",
-    subject: "Կից ներկայացված են քաղվածքներ 01.02.2021 , դուք դուռակեք երևի",
-  },
-  {
-    name: "Marine Mikoyan",
-    subject: "Խնդրում եմ ուղարկել գնային առաջարկ ։",
-  },
-  {
-    name: "Seda Mkrtchyan",
-    subject: "Մեր կազմակերպությունը ուղղարկում է ձեզ լիքը լիքը նամակներ",
-  },
-];
-const notificationsConfigInner = {
-   userImg : notificationUserImg,
-   name : "Mailchimp",
-   mail: {
-     title : "Dear Sdesign,",
-     subject : "Lorem IPsum",
-   }
-};
-function Notifications() {
+function Notifications( { history  } ) {
+  const [notificationsConfig, setnotificationsConfig] = useState(null);
+  const [notificationsInnerId, setnotificationsInnerId] = useState(0);
+  const [isLoadingOpen, setisLoadingOpen] = useState(false);
+  
+  useEffect(() => {
+    const token = isAuthificationPassed();
+    !token && history.push("/");
+    setisLoadingOpen(true);
+    getNotificationUsers((data) => {
+      notificationsConfigInner = data.items;
+      setnotificationsConfig(
+        data.items.map((el) => ({
+          name: el["sender-name"],
+          subject: el.content,
+        }))
+      );
+      
+      setisLoadingOpen(false);
+    });
+  }, []);
   return (
-    <Admin>
-      <div className="admin_content">
-        <AdminContentHeader />
-        <div className="admin_content_mail">
-          <div className="admin_content_mail_sidebar">
-            <img src={mailbox} className="admin_content_mail_sidebar_logo"  alt=""  />
-            <div className="admin_content_mail_sidebar_dialog-panel">
-              {notificationsConfig.map((el, i) => (
-                <DialogItem data={el} key={i} />
-              ))}
+    <>
+      <Admin>
+        <div className="admin_content">
+          <AdminContentHeader />
+          <div className="admin_content_mail">
+            <div className="admin_content_mail_sidebar">
+              <img
+                src={mailbox}
+                className="admin_content_mail_sidebar_logo"
+                alt=""
+              />
+              <div className="admin_content_mail_sidebar_dialog-panel">
+                {notificationsConfig &&
+                  notificationsConfig.map((el, i) => (
+                    <DialogItem
+                      changeDialogItem={() => setnotificationsInnerId(i)}
+                      data={el}
+                      key={i}
+                    />
+                  ))}
+              </div>
             </div>
+            {notificationsConfigInner && (
+              <NotificationsInner
+                data={notificationsConfigInner[notificationsInnerId]}
+              />
+            )}
           </div>
-              <NotificationsInner data={ notificationsConfigInner } /> 
         </div>
-      </div>
-    </Admin>
+      </Admin>
+      {isLoadingOpen && <Loading type="spin" />}
+    </>
+    
+    
   );
 }
 

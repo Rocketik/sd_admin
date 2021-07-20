@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function DialogItem( { data } ) {
+export default function DialogItem( { data, changeDialogItem } ) {
     return (
-        <div className="admin_content_mail_sidebar_dialog-panel_item">
+        <div onClick={changeDialogItem} className="admin_content_mail_sidebar_dialog-panel_item">
             <input type="checkbox"  />
             <div className="admin_content_mail_sidebar_dialog-panel_item_name-subject">
                 <h2> {data.name}   </h2>

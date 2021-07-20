@@ -25,7 +25,7 @@ export default function ResetPasswordLevel2( props ) {
         url: host + requestRoutes.resetPasswordSecond(),
         data: reqData,
         headers: {
-          token : props.location.params.token
+          token : props.location.state ? props.location.state.token  : undefined,
         } 
       })
       .then(() => {
@@ -35,8 +35,8 @@ export default function ResetPasswordLevel2( props ) {
         // setTimeout(() => {  
           history.push({
             pathname: "/forget-password/setPassword", 
-            params : { 
-                token :  props.location.params.token
+            state : { 
+              token : props.location.state ? props.location.state.token  : undefined,
             }
           });
         // }, 1000);
@@ -44,7 +44,7 @@ export default function ResetPasswordLevel2( props ) {
       .catch( err => { 
         
         setisLoadingOpen(previos => !previos);
-        inoToast.error( err.toUpperCase() )
+        inoToast.error( err.response.data.errMessage.toUpperCase() )
       });
       
      

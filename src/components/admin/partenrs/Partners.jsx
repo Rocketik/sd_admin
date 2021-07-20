@@ -1,47 +1,59 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Admin from "../Admin";
 import AdminContentHeader from "../AdminContentHeader"; 
-import logo1 from "../../../assets/images/partnersLogo1.png";
-import logo2 from "../../../assets/images/partnersLogo2.png";
-import logo3 from "../../../assets/images/partnersLogo3.png";
-import logo4 from "../../../assets/images/partnersLogo4.png";
-import logo5 from "../../../assets/images/partnersLogo5.png";
-import logo6 from "../../../assets/images/partnersLogo6.png";
-import logo7 from "../../../assets/images/partnersLogo7.png";
-import logo8 from "../../../assets/images/partnersLogo8.png";
-import logo9 from "../../../assets/images/partnersLogo9.png";
-import logo10 from "../../../assets/images/partnersLogo10.png";
+ 
 import PartnersItem from "./PartnersItem";
 import addIcon from "../../../assets/images/addIcon.svg";
+ 
+import { getPartenrsData } from "../../../js/requests";
+import AddElementParters from './../../modals/admin/AddElementParters';
+import { changeModalState, isAuthificationPassed } from './../../../js/lib/front-libik';
+import Modal from './../../modals/Modal';
+import Loading from './../../loading/Loading';
 
-const partnersConfig = [
-    logo1,
-    logo2,
-    logo3,
-    logo4,
-    logo5,
-    logo6,
-    logo7,
-    logo8,
-    logo9,
-    logo10,
+ 
 
-  ]
+export default function Partners( { history } ) {
+  const [partnersConfig, setpartnersConfig] = useState();
+  const [isAddItemModalOpen, setisAddItemModalOpen] = useState(false);
 
-export default function Partners( ) {
+  const [isLoadingOpen, setisLoadingOpen] = useState(false);
+
+  useEffect(() => {
+    const token = isAuthificationPassed();
+    !token && history.push("/"); 
+    setisLoadingOpen(true)
+    getPartenrsData( (data) => {
+      setpartnersConfig(data);
+      setisLoadingOpen(false)
+    } )
+ 
+  }, [ ])
   return (
-    <Admin>
+    <Admin isGalery={ false } >
       <div className="admin_content">
         <AdminContentHeader title="Գործընկերներ" />
         <div className="admin_content_inner admin_content_inner-partners">
+          
             <div className="admin_content_inner_add">
-              <button><img src={addIcon} alt="" /> Ավելացնել </button>
+              <button onClick={ () => changeModalState(setisAddItemModalOpen) }><img src={addIcon} alt="" /> Ավելացնել </button>
+              { isAddItemModalOpen &&
+               <Modal>
+                  <AddElementParters  closeModal={() => changeModalState(setisAddItemModalOpen)} updateData={ newState => {
+                     console.log( newState );
+                     setpartnersConfig( newState )
+                     }  } />
+              </Modal>
+               }
             </div>
             <div className="admin_content_inner_partners">
-                {partnersConfig.map( (el, i ) =>  <PartnersItem  key={i} image={ el }/> )} 
+                { partnersConfig && partnersConfig.map( (el, i ) =>  <PartnersItem updateData={ ( newState )=>{ setpartnersConfig(newState) } }  key={i} data={ el }/> )} 
             </div>
         </div>
       </div>
+      
+      {isLoadingOpen && <Loading type="spin" />}
+      
     </Admin>
   );
 }

@@ -5,6 +5,7 @@ import { inoToast } from './../../toast/toast';
 import { doRequest } from "../../../js/lib/front-libik";
 import { host, requestRoutes } from './../../../js/config';
 import { useHistory } from 'react-router-dom';
+import { userValidation } from './../../../js/validation/index';
 
 export default function ResetPasswordLevel3( props ) { 
   const history = useHistory();
@@ -14,11 +15,15 @@ export default function ResetPasswordLevel3( props ) {
     e.preventDefault();
     const formElements = e.target.elements;
     const reqData = {
-      "new-password": formElements.password ? formElements.password.value : null,  
+      "new-password":  formElements.password.value  ,  
     };  
    
-    if(formElements["repeat-password"].value != formElements.password.value ){
+    const { error } = userValidation({ password:formElements.password.value  }, ["email"] ); 
+
+    if(formElements["repeat-password"].value !== formElements.password.value ){
       inoToast.error("Password and Repat password dosnt equal")
+    }else if(error){
+      inoToast.error( error.details[0].message.toUpperCase() );
     }else{
    
       doRequest({
@@ -26,7 +31,7 @@ export default function ResetPasswordLevel3( props ) {
         url: host + requestRoutes.resetPasswordThird(),
         data: reqData,
         headers: {
-          token : props.location.params.token 
+          token : props.location.state ? props.location.state.token  : undefined,
         } 
       })
       .then(( ) => {
@@ -39,7 +44,7 @@ export default function ResetPasswordLevel3( props ) {
         }, 1000);
       })
       .catch( err => { 
-        inoToast.error( err.toUpperCase() )
+        inoToast.error( err.response.data.errMessage.toUpperCase() )
       });
     }
  

@@ -3,7 +3,7 @@ import Joi from "@hapi/joi";
 export const userValidation = (data,params=[])  => {  
     const schema = {
         email: Joi.string().min(6).required().email(),
-        password: Joi.string().min(6).required()
+        password: Joi.string().min(8).required()
     };
     if(params.length){ 
         for (let i = 0; i < params.length; i++) { ;
@@ -11,6 +11,7 @@ export const userValidation = (data,params=[])  => {
             delete schema[forDelete];
         }
     }  
+    
     
     return Joi.object(schema).validate(data)
 }

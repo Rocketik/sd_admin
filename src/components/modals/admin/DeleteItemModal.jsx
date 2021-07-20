@@ -1,20 +1,29 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import deleteIcon from '../../../assets/images/deleteIcon.png';
 import closeIcon from '../../../assets/images/closeIcon.png';
 import { doRequest } from '../../../js/lib/front-libik';   
-import { GalleryContext } from './../../admin/gallery/Gallery';
-import { getData } from './../../../js/requests';
+import { inoToast } from './../../toast/toast';
+import { isAuthTokenHasExpired } from './../../../js/lib/front-libik';
+import { useHistory } from 'react-router-dom';
 
-export default function DeleteItemModal( { reqParams, closeModal } ) { 
-    const GalleryContextVal = useContext(GalleryContext);
-    const deleteItem = ()=>{
+export default function DeleteItemModal( { reqParams, closeModal, resetData  } ) { 
+    const history = useHistory();
+    
+    const deleteItem = (   )=>{
           
             doRequest(reqParams)
             .then(( ) => {
-                getData((data)=>{
-                    GalleryContextVal(data)
-                })
+                resetData()
                 closeModal(  );    
+            })
+            .catch( err => {
+                if(err.noBackend){
+                    inoToast.error("Something went wrong");
+                    console.log(err);
+                  }
+                  isAuthTokenHasExpired(err,history);
+                  inoToast.error(err) ;
+                  
             })
             
     }

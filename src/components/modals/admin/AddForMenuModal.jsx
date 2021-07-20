@@ -1,14 +1,17 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import closeIcon from "../../../assets/images/closeIcon.png";
 import inputTypeFileIcon from "../../../assets/images/inputTypeFileIcon.png";
 import { doRequest } from "../../../js/lib/front-libik";
 import { GalleryContext } from "../../admin/gallery/Gallery";
 import { host, requestRoutes } from "./../../../js/config";
-import { getData } from "./../../../js/requests";
+import { getGalleryData } from "./../../../js/requests";
+import { isAuthTokenHasExpired } from './../../../js/lib/front-libik';
+import { inoToast } from './../../toast/toast';
 
 export default function AddForMenuModal({ closeModal }) {
   const GalleryContextVal = useContext(GalleryContext);
-
+  const history = useHistory();
   const sendRequest = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -23,17 +26,22 @@ export default function AddForMenuModal({ closeModal }) {
         token: localStorage.token,
         "Content-Type": "multipart/form-data",
       },
-    };
-    console.log(reqData);
+    }; 
     doRequest(reqData)
-      .then((data) => {
-        getData((data) => {
+      .then((   )  => {
+        getGalleryData((data) => {
           GalleryContextVal(data);
         });
         closeModal();
       })
-      .catch((data) => {
-        console.log("error", data);
+      .catch(( err ) => {
+         if(err.noBackend){
+           inoToast.error("Something went wrong");
+           console.log(err);
+         }
+         isAuthTokenHasExpired(err,history);
+         inoToast.error(err) 
+          
       });
   };
   return (
@@ -47,7 +55,7 @@ export default function AddForMenuModal({ closeModal }) {
         />
       </div>
       <div className="menu-drawer-add-modal_content">
-        <form onSubmit={sendRequest} type="mu">
+        <form onSubmit={sendRequest} >
           <div className="menu-drawer-add-modal_content_image">
             <img
               src={inputTypeFileIcon}

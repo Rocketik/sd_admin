@@ -1,4 +1,4 @@
-export const host = "http://192.168.0.214:3007";
+export const host = "46.4.249.19:3019";
 
 
 export const imageUrl = host + "/public/";

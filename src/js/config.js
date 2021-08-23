@@ -1,4 +1,4 @@
-export const host = "https://91.199.38.161:3007";
+export const host = "https://api.sdesign.am";
 
 
 export const imageUrl = host + "/public/";
